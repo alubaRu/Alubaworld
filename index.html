@@ -6,7 +6,6 @@
     <title>AlubaworldOriginalSite</title>
     <style>
         :root {
-            /* ТЕМНАЯ ТЕМА (DARK) - Оставлена как была */
             --bg: #050507;
             --card-bg: rgba(255, 255, 255, 0.03);
             --text: #ffffff;
@@ -15,21 +14,22 @@
             --accent: #ff4444;
             --king: #a333ff;
             --partner: #00d4ff;
+            --version-color: #55ff55;
             --shadow: none;
             --btn-bg: rgba(255,255,255,0.03);
         }
 
-        /* СВЕТЛАЯ ТЕМА (LIGHT) - ПОЛНОСТЬЮ ПЕРЕДЕЛАНА ДЛЯ ГЛАЗ */
         [data-theme="light"] {
-            --bg: #eef2f5;           /* Очень мягкий серо-голубой, не белый */
-            --card-bg: #ffffff;      /* Чистый белый для карточки */
-            --text: #2c3e50;         /* Темно-синий/серый, мягче черного */
-            --text-dim: #7f8c8d;     /* Мягкий серый */
+            --bg: #eef2f5;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-dim: #7f8c8d;
             --border: rgba(0, 0, 0, 0.05);
-            --accent: #e74c3c;       /* Более матовый красный */
-            --king: #9b59b6;         /* Более спокойный фиолетовый */
-            --partner: #3498db;      /* Спокойный голубой */
-            --shadow: 0 10px 30px rgba(0,0,0,0.08); /* Мягкая тень для объема */
+            --accent: #e74c3c;
+            --king: #9b59b6;
+            --partner: #3498db;
+            --version-color: #27ae60;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
             --btn-bg: #f8f9fa;
         }
 
@@ -48,17 +48,17 @@
             width: 100%; 
             max-width: 420px; 
             text-align: center;
-            box-shadow: var(--shadow); /* Тень только в светлой теме */
+            box-shadow: var(--shadow);
             transition: 0.3s;
         }
 
         .nav-dots { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100; }
         .dot { width: 35px; height: 6px; border-radius: 3px; background: var(--border); cursor: pointer; transition: 0.3s; }
-        /* В светлой теме точки должны быть видны */
         [data-theme="light"] .dot { background: #cbd5e0; }
         .dot.active { background: var(--accent) !important; width: 60px; }
 
         .section-title { font-size: 2.2em; font-weight: 900; margin: 0; background: linear-gradient(to right, var(--accent), #ff8888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .version-text { font-size: 0.75em; color: var(--version-color); margin: 5px 0; font-weight: bold; }
         
         .tab { margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--border); background: var(--btn-bg); text-align: left; transition: 0.2s; }
         .tab-header { padding: 12px 15px; cursor: pointer; font-size: 0.85em; font-weight: 800; display: flex; justify-content: space-between; }
@@ -66,17 +66,17 @@
         .tab.active .tab-content { max-height: 250px; padding: 10px 15px; border-top: 1px solid var(--border); }
 
         .status-box { flex:1; background: var(--btn-bg); padding: 10px; border-radius: 12px; border: 1px solid var(--border); position: relative; }
-        .refresh-btn { position: absolute; top: 5px; right: 5px; font-size: 0.8em; cursor: pointer; opacity: 0.5; }
+        .refresh-btn { position: absolute; top: 5px; right: 8px; font-size: 0.9em; cursor: pointer; opacity: 0.4; transition: 0.3s; }
+        .refresh-btn:hover { opacity: 1; transform: rotate(90deg); }
         
         .timer-container { display: flex; justify-content: center; gap: 8px; margin-top: 20px; }
         .time-box { background: rgba(0,212,255,0.05); padding: 10px; border-radius: 12px; border: 1px solid var(--partner); min-width: 65px; text-align: center; }
-        [data-theme="light"] .time-box { background: rgba(52, 152, 219, 0.1); border-color: var(--partner); }
+        [data-theme="light"] .time-box { background: rgba(52, 152, 219, 0.1); }
         .time-val { display: block; font-size: 1.2em; font-weight: 900; color: var(--partner); }
         .time-lab { font-size: 0.5em; text-transform: uppercase; color: var(--text-dim); }
 
         .btn-group { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 15px; }
         .btn { padding: 12px; border-radius: 12px; border: 1px solid var(--border); text-decoration: none; color: var(--text); font-size: 0.75em; font-weight: bold; background: var(--btn-bg); text-align: center; transition: 0.2s; }
-        .btn:hover { opacity: 0.8; }
         
         .theme-btn { position: fixed; top: 15px; left: 15px; z-index: 110; padding: 8px 15px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text); cursor: pointer; font-size: 0.7em; font-weight: bold; box-shadow: var(--shadow); }
         .hint { font-size: 0.6em; color: var(--text-dim); margin: 15px 0; text-transform: uppercase; letter-spacing: 1px; }
@@ -95,10 +95,9 @@
         <section>
             <div class="card">
                 <h1 class="section-title">Alubaworld</h1>
-                <p style="font-size: 0.7em; color: #55ff55; margin: 5px 0;">Minecraft 1.16.5</p>
-                [data-theme="light"] .section-title + p { color: #27ae60 !important; } /* Зеленый в светлой теме */
-
-                <div style="background: rgba(0,0,0,0.05); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; color: var(--accent); font-weight: bold; margin: 15px 0; font-family: monospace;" onclick="copyIP()">
+                <p class="version-text">Minecraft 1.16.5</p>
+                
+                <div style="background: rgba(0,0,0,0.05); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; color: var(--accent); font-weight: bold; margin: 15px 0; font-family: monospace; letter-spacing: 0.5px;" onclick="copyIP()">
                     Alubaworld.aternos.me:11026
                 </div>
 
@@ -162,7 +161,6 @@
     </div>
 
     <script>
-        // --- ЛИСТАНИЕ ---
         let currentIdx = 0;
         function scrollToPage(idx) {
             currentIdx = idx;
@@ -179,40 +177,21 @@
             if (sX - eX < -60) scrollToPage(0);
         });
 
-        // --- МОНИТОРИНГ ---
-        // Если API не видит сервер, это проблема хостинга, но этот код пробует всё возможное
         async function updateServer() {
             const statusEl = document.getElementById('status');
             const onlineCountEl = document.getElementById('online-count');
             const ip = "Alubaworld.aternos.me";
             const port = "11026";
 
-            // 1. Попытка через основной API
             try {
                 let response = await fetch(`https://api.mcsrvstat.us/2/${ip}:${port}`);
                 let data = await response.json();
 
                 if (data.online) {
                     statusEl.innerText = "ОНЛАЙН";
-                    statusEl.style.color = "#55ff55"; // Зеленый
-                    if(document.body.getAttribute('data-theme') === 'light') statusEl.style.color = "#27ae60";
+                    statusEl.style.color = (document.body.getAttribute('data-theme') === 'light') ? "#27ae60" : "#55ff55";
                     onlineCountEl.innerText = `${data.players.online} / ${data.players.max}`;
-                    return;
-                }
-            } catch (e) {}
-
-            // 2. Попытка через альтернативный API (если первый сказал оффлайн)
-            try {
-                let response2 = await fetch(`https://mcapi.us/server/status?ip=${ip}&port=${port}`);
-                let data2 = await response2.json();
-
-                if (data2.online) {
-                    statusEl.innerText = "ОНЛАЙН";
-                    statusEl.style.color = "#55ff55";
-                    if(document.body.getAttribute('data-theme') === 'light') statusEl.style.color = "#27ae60";
-                    onlineCountEl.innerText = `${data2.players.now} / ${data2.players.max}`;
                 } else {
-                    // Если оба молчат
                     statusEl.innerText = "ОФФЛАЙН";
                     statusEl.style.color = "#ff4444";
                     onlineCountEl.innerText = "0 / 0";
@@ -223,11 +202,10 @@
         }
 
         function forceUpdate() {
-            document.getElementById('status').innerText = "....";
+            document.getElementById('status').innerText = "...";
             updateServer();
         }
 
-        // --- ТАЙМЕР ---
         function updateTimer() {
             const diff = new Date("Feb 7, 2026 13:00:00").getTime() - new Date().getTime();
             if (diff > 0) {
@@ -241,7 +219,7 @@
         function toggleTheme() {
             let current = document.body.getAttribute('data-theme');
             document.body.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
-            updateServer(); // Обновить цвета статуса
+            updateServer();
         }
 
         function copyIP() {
@@ -254,4 +232,4 @@
         updateServer(); updateTimer();
     </script>
 </body>
-    </html>
+                                              </html>
