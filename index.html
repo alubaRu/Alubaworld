@@ -40,7 +40,7 @@
         .dot { width: 30px; height: 5px; border-radius: 3px; background: var(--border); cursor: pointer; }
         .dot.active { background: var(--accent); width: 50px; }
 
-        .site-title { font-size: 1.6em; font-weight: 900; margin: 0; background: linear-gradient(to right, var(--accent), #ff8888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; word-break: break-all; }
+        .section-title { font-size: 2.2em; font-weight: 900; margin: 0; background: linear-gradient(to right, var(--accent), #ff8888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
         .tab { margin-bottom: 8px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.02); text-align: left; }
         .tab-header { padding: 12px 15px; cursor: pointer; font-size: 0.85em; font-weight: 800; display: flex; justify-content: space-between; }
@@ -73,10 +73,10 @@
     <div class="carousel" id="carousel">
         <section>
             <div class="card">
-                <h1 class="site-title">AlubaworldOriginalSite</h1>
-                <p style="font-size: 0.7em; color: #55ff55; margin: 5px 0;">Minecraft Java 1.16.5</p>
+                <h1 class="section-title">Alubaworld</h1>
+                <p style="font-size: 0.7em; color: #55ff55; margin: 5px 0;">Java 1.16.5</p>
                 
-                <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; color: var(--accent); font-weight: bold; margin: 15px 0; font-family: monospace;" onclick="copyIP()">
+                <div style="background: rgba(0,0,0,0.2); padding: 12px; border-radius: 12px; border: 1px solid var(--border); cursor: pointer; color: var(--accent); font-weight: bold; margin: 15px 0;" onclick="copyIP()">
                     Alubaworld.aternos.me:11026
                 </div>
 
@@ -86,7 +86,7 @@
                         <span style="font-size: 0.5em; opacity: 0.6;">ИГРОКИ</span>
                     </div>
                     <div style="flex:1; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px; border: 1px solid var(--border);">
-                        <span id="status" style="color: #ff4444; font-weight: 900; font-size: 1.1em;">...</span><br>
+                        <span id="status" style="color: #ffaa00; font-weight: 900; font-size: 1.1em;">...</span><br>
                         <span style="font-size: 0.5em; opacity: 0.6;">СТАТУС</span>
                     </div>
                 </div>
@@ -120,13 +120,13 @@
                     </div>
                 </div>
             </div>
-            <p class="hint">Вторая вкладка →</p>
+            <p class="hint">AlubaworldOriginalSite</p>
         </section>
 
         <section>
             <div class="card">
-                <h1 class="site-title" style="background: linear-gradient(to right, var(--partner), #88f0ff); -webkit-background-clip: text;">AlubaworldOriginalSite</h1>
-                <p style="font-size: 0.7em; letter-spacing: 2px; color: var(--partner); font-weight: bold; margin-top: 15px;">ОТКРЫТИЕ ХАЙПЕРЛЕНД</p>
+                <h1 class="section-title" style="background: linear-gradient(to right, var(--partner), #88f0ff); -webkit-background-clip: text;">HyperLand</h1>
+                <p style="font-size: 0.7em; letter-spacing: 2px; color: var(--partner); font-weight: bold; margin-top: 15px;">ПАРТНЕР ПРОЕКТА</p>
                 
                 <div class="timer-container" id="timer">
                     <div class="time-box"><span class="time-val" id="days">00</span><span class="time-lab">Дн</span></div>
@@ -134,9 +134,9 @@
                     <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-lab">Мин</span></div>
                     <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-lab">Сек</span></div>
                 </div>
-                <p style="margin-top: 30px; font-size: 0.7em; color: var(--text-dim);">Следите за обновлениями на основном сайте</p>
+                <p style="margin-top: 30px; font-size: 0.7em; color: var(--text-dim);">AlubaworldOriginalSite &copy; 2026</p>
             </div>
-            <p class="hint">← Назад</p>
+            <p class="hint">← Назад к Aluba</p>
         </section>
     </div>
 
@@ -165,12 +165,13 @@
             const statusEl = document.getElementById('status');
             const onlineCountEl = document.getElementById('online-count');
             try {
-                const res = await fetch(`https://api.mcsrvstat.us/2/Alubaworld.aternos.me:11026?t=${Date.now()}`);
+                const res = await fetch(`https://api.mcsrvstat.us/2/Alubaworld.aternos.me:11026`);
                 const data = await res.json();
+                
                 if (data.online) {
                     statusEl.innerText = "ОНЛАЙН";
                     statusEl.style.color = "#55ff55";
-                    onlineCountEl.innerText = `${data.players.online} / ${data.players.max}`;
+                    onlineCountEl.innerText = (data.players.online || 0) + " / " + (data.players.max || 0);
                 } else {
                     statusEl.innerText = "ОФЛАЙН";
                     statusEl.style.color = "#ff4444";
@@ -184,10 +185,10 @@
         function updateTimer() {
             const diff = new Date("Feb 7, 2026 13:00:00").getTime() - new Date().getTime();
             if (diff > 0) {
-                document.getElementById('days').innerText = Math.floor(diff / 864e5);
-                document.getElementById('hours').innerText = Math.floor((diff % 864e5) / 36e5);
-                document.getElementById('mins').innerText = Math.floor((diff % 36e5) / 6e4);
-                document.getElementById('secs').innerText = Math.floor((diff % 6e4) / 1000);
+                document.getElementById('days').innerText = Math.floor(diff / 864e5).toString().padStart(2, '0');
+                document.getElementById('hours').innerText = Math.floor((diff % 864e5) / 36e5).toString().padStart(2, '0');
+                document.getElementById('mins').innerText = Math.floor((diff % 36e5) / 6e4).toString().padStart(2, '0');
+                document.getElementById('secs').innerText = Math.floor((diff % 6e4) / 1000).toString().padStart(2, '0');
             }
         }
 
@@ -202,7 +203,8 @@
 
         setInterval(updateServer, 15000); 
         setInterval(updateTimer, 1000);
-        updateServer(); updateTimer();
+        updateServer(); 
+        updateTimer();
     </script>
 </body>
                                                                                                                    </html>
